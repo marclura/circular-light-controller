@@ -1,0 +1,111 @@
+html {
+    font-size: 18px;
+}
+
+body {
+    background-color: black;
+    margin: 0;
+    padding: 0;
+    font-family: monospace;
+}
+
+/* rings */
+#container {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+}
+
+#ring-container {
+    margin-left: auto;
+    margin-right: auto;
+    position: relative;
+    border: 2px solid white;
+    border-radius: 50%;
+    font-size: 28px;
+}
+
+.pixel {
+    position: absolute;
+    display: flex;
+    background-color: grey;
+    height: 2em;
+    width: 2em;
+    margin: -1em;
+    top: 50%;
+    left: 50%;
+    cursor: pointer;
+    border-radius: 10%;
+    font-size: 0.75em;
+    justify-content: center;
+    align-items: center;
+    font-family: monospace;
+    -ms-user-select: none;
+    -webkit-user-select: none;
+    user-select: none;
+}
+
+.active-pixel {
+    outline: 0.3em solid white;
+}
+
+
+/* groups */
+
+h2 {
+    font-size: inherit;
+    font-weight: inherit;
+}
+
+#groups-menu {
+    position: absolute;
+}
+
+#groups-container {
+    padding: 1rem;
+    padding-right: 0;
+    display: inline-block;
+}
+
+.group {
+    color: white;
+    display: inline-flex;
+    padding: 0.2rem;
+    font-size: 1.2rem;
+    outline: 0.02em solid grey;
+    border-radius: 0.2rem;
+    margin-right: 1rem;
+}
+
+.group-title {
+    display: inline-block;
+    margin: 0;
+    padding: 0;
+}
+
+.active-group {
+    outline: 0.2rem solid white;
+}
+
+.remove-group-button {
+    display: inline-block;
+    font-family: monospace;
+    padding-right: 0.3rem;
+    padding-left: 0.5rem;
+    transform: rotate(45deg);
+}
+
+.color-picker {
+    margin-left: 0.5rem;
+    display: inline-block;
+}
+
+#add-group-button {
+    font-size: 1.5rem;
+    color: white;
+    display: inline-block;
+    padding: 0.5rem;
+    border: none;
+    align-items: center;
+    cursor: pointer;
+}
