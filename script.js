@@ -1,12 +1,32 @@
 // circular light
 
 // settings
-const pixel_count = 27;
-const ring_size = 600;  // px
+const pixel_count = 12;
 
 let ring_container = document.getElementById('ring-container');
 
 let color_pickers = document.getElementsByClassName('color-picker');
+
+const pixel_width = 50; // px
+
+const windows_width = document.documentElement.clientWidth;
+const windows_height =document.documentElement.clientHeight;
+
+
+let _ring_size = 0;
+
+if(windows_width < windows_height) {
+    _ring_size = windows_width - pixel_width;
+}
+else {
+    _ring_size = windows_height - pixel_width;
+}
+
+if(_ring_size > 600) _ring_size = 600;
+
+const ring_size = _ring_size;   // px
+
+console.log(pixel_width);
 
 ring_container.style.width = ring_size + 'px';
 ring_container.style.height = ring_size + 'px';
@@ -111,8 +131,10 @@ function addGroup() {
     // h2 group
     let h2 = document.createElement('h2');
     h2.classList.add('group-title');
-    h2.innerHTML = 'Group' + id;
+    h2.innerHTML = 'Group' + String(id).padStart(2, '0');
     div.append(h2);
+
+    console.log(h2);
 
     // input color picker
     let input_color = document.createElement('input');
@@ -124,11 +146,13 @@ function addGroup() {
     div.append(input_color);
 
     // remove group button
+    /*
     let remove_group_button = document.createElement('span');
     remove_group_button.setAttribute('group', id);
     remove_group_button.classList.add('remove-group-button');
     remove_group_button.innerHTML = '+';
     div.append(remove_group_button);
+    */
 
     // append to the groups container
     groups_container.append(div);

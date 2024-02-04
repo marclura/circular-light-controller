@@ -1,22 +1,41 @@
 html {
     font-size: 18px;
 }
+:root {
+    --pixel_width: 2em;
+}
+
+
 
 body {
     background-color: black;
     margin: 0;
     padding: 0;
+    margin-right: auto;
+    margin-left: auto;
     font-family: monospace;
+    max-width: 600px;
+    position: relative;
+    padding-bottom: 4rem;
+}
+
+h1 {
+    color: white;
+    font-size: 1.5rem;
+    text-align: center;
+    width: 100%;
 }
 
 /* rings */
 #container {
-    height: 100vh;
+    margin-top: 3rem;
     display: flex;
     align-items: center;
 }
 
 #ring-container {
+    width: 100vw;
+    height: 100vw;
     margin-left: auto;
     margin-right: auto;
     position: relative;
@@ -29,8 +48,8 @@ body {
     position: absolute;
     display: flex;
     background-color: grey;
-    height: 2em;
-    width: 2em;
+    height: var(--pixel_width);
+    width: var(--pixel_width);
     margin: -1em;
     top: 50%;
     left: 50%;
@@ -46,7 +65,7 @@ body {
 }
 
 .active-pixel {
-    outline: 0.3em solid white;
+    outline: 0.2em solid white;
 }
 
 
@@ -58,29 +77,34 @@ h2 {
 }
 
 #groups-menu {
-    position: absolute;
+    margin-top: 2.5rem;
 }
 
 #groups-container {
     padding: 1rem;
     padding-right: 0;
-    display: inline-block;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center
 }
 
 .group {
     color: white;
-    display: inline-flex;
     padding: 0.2rem;
     font-size: 1.2rem;
     outline: 0.02em solid grey;
     border-radius: 0.2rem;
     margin-right: 1rem;
+    margin-bottom: 0.8rem;
 }
 
 .group-title {
     display: inline-block;
     margin: 0;
     padding: 0;
+    -ms-user-select: none;
+    -webkit-user-select: none;
+    user-select: none;
 }
 
 .active-group {
@@ -100,12 +124,27 @@ h2 {
     display: inline-block;
 }
 
+#add-button-container {
+    text-align: center;
+}
+
 #add-group-button {
-    font-size: 1.5rem;
-    color: white;
-    display: inline-block;
+    font-size: 2rem;
+    color: black;
+    display: block;
     padding: 0.5rem;
     border: none;
     align-items: center;
     cursor: pointer;
+    background-color: white;
+    border-radius: 50%;
+    width: 2rem;
+    height: 2rem;
+    text-align: center;
+    line-height: 1.6rem;
+    margin-right: auto;
+    margin-left: auto;
+    -ms-user-select: none;
+    -webkit-user-select: none;
+    user-select: none;
 }

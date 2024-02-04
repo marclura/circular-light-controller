@@ -2,28 +2,27 @@
 <html>
     <head>
     <title>Circular light</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="style.css">
     </head>
     <body>
-    
+    <h1>Circular light controller</h1>
+    <section id="container">
+        <div id="ring-container"></div>
+    </section>
+
     <section id="groups-menu">
         <div id="groups-container">
-            <div id="group-1" group="1" class="group active-group">
-                <h2 class="group-title">Group1</h2>
-                <input type="color" id="color-picker-1" class="color-picker" value="#808080" group="1">
-                <span group="1" class="remove-group-button">+</span>
+            <div id="group-1" group="1" class="group">
+                <h2 class="group-title">Group01</h2><input type="color" id="color-picker-1" class="color-picker" value="#808080" group="1">
             </div>
         </div>
+    </section>
+
+    <section id="add-button-container">
         <div id="add-group-button" role="button" aria-pressed="false">+</div>
     </section>
 
-    <section id="container">
-
-        <div id="ring-container">
-
-        </div>
-
-    </section>
 
     <script src="script.js"></script>
 
