@@ -1,37 +1,46 @@
-// circular light
+/**
+ * Circular Light Controller
+ * https://github.com/marclura/circular-light-controller/tree/main
+ * 
+ */ 
 
-// settings
-const pixel_count = 12;
+
+/**
+ * Settings
+ */
+
+const pixel_count = 12; // amount of pixels
+const pixel_width = 50; // px
+const max_ring_size = 600;  // px
+
+
+/**
+ * Setup
+ */
 
 let ring_container = document.getElementById('ring-container');
-
 let color_pickers = document.getElementsByClassName('color-picker');
-
-const pixel_width = 50; // px
 
 const windows_width = document.documentElement.clientWidth;
 const windows_height =document.documentElement.clientHeight;
 
-
-let _ring_size = 0;
+let ring_size = 0;
 
 if(windows_width < windows_height) {
-    _ring_size = windows_width - pixel_width;
+    ring_size = windows_width - pixel_width;
 }
 else {
-    _ring_size = windows_height - pixel_width;
+    ring_size = windows_height - pixel_width;
 }
 
-if(_ring_size > 600) _ring_size = 600;
-
-const ring_size = _ring_size;   // px
-
-console.log(pixel_width);
+if(ring_size > max_ring_size) _ring_size = max_ring_size;
 
 ring_container.style.width = ring_size + 'px';
 ring_container.style.height = ring_size + 'px';
 
 let current_active_group = 1;
+
+
 
 /**
  * Add pixel to the ring
@@ -211,7 +220,9 @@ function removeGroup(group_to_remove) {
 }
 */
 
-// button add group
+/**
+ *  button add group
+ */ 
 let add_group_button = document.getElementById('add-group-button');
 add_group_button.addEventListener('click', addGroup);
 
