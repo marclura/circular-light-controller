@@ -33,7 +33,7 @@ else {
     ring_size = windows_height - pixel_width;
 }
 
-if(ring_size > max_ring_size) _ring_size = max_ring_size;
+if(ring_size > max_ring_size) ring_size = max_ring_size;
 
 ring_container.style.width = ring_size + 'px';
 ring_container.style.height = ring_size + 'px';
