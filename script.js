@@ -41,6 +41,33 @@ ring_container.style.height = ring_size + 'px';
 let current_active_group = 1;
 
 
+/*
+* Add websocket 
+*/
+var gateway = `ws://${window.location.hostname}/ws`;
+var websocket;
+window.addEventListener('load', onLoad);
+function initWebSocket() {
+    console.log('Trying to open a WebSocket connection...');
+    websocket = new WebSocket(gateway);
+    websocket.onopen = onOpen;
+    websocket.onclose = onClose;
+    websocket.onmessage = onMessage; //This event acts as a client's ear to the server. Whenever the server sends data, the onmessage event gets fired
+}
+
+function onOpen(event) {
+	console.log('Connection opened');
+}
+function onClose(event) {
+	console.log('Connection closed');
+	setTimeout(initWebSocket, 2000);
+}
+function onMessage(event) {
+	console.log(event.data);
+}
+function onLoad(event) {
+	initWebSocket();
+}
 
 /**
  * Add pixel to the ring
@@ -79,10 +106,12 @@ function updatePixels() {
 
         if(p.getAttribute('group') == current_active_group) {
             p.style.backgroundColor = color_pickers[current_active_group - 1].value;
+            websocket.send(i + ',' + color_pickers[current_active_group - 1].value);		//Send pixel data id + color
         }
         else {
             if(p.getAttribute('group') == null) {
                 p.style.backgroundColor = null;
+                websocket.send(i + ',' + "#000000");	//When pixel is off swend black color
             }
         }
     }
