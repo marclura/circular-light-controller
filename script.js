@@ -69,12 +69,26 @@ function onLoad(event) {
 	initWebSocket();
 }
 
+/*
+*	
+*/
+
+function hexToRgb(hex) {
+  var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+  return result ? {
+    r: parseInt(result[1], 16),
+    g: parseInt(result[2], 16),
+    b: parseInt(result[3], 16)
+  } : null;
+}
+
 /**
  * Add pixel to the ring
  */
 
 const angle = 360 / pixel_count;
 let rotation = 0;
+let refresh_flag = 1;
 
 for(let i=0; i<pixel_count; i++) {
     let pixel = document.createElement('div');
@@ -106,17 +120,51 @@ function updatePixels() {
 
         if(p.getAttribute('group') == current_active_group) {
             p.style.backgroundColor = color_pickers[current_active_group - 1].value;
-            websocket.send(i + ',' + color_pickers[current_active_group - 1].value);		//Send pixel data id + color
         }
         else {
             if(p.getAttribute('group') == null) {
                 p.style.backgroundColor = null;
-                websocket.send(i + ',' + "#000000");	//When pixel is off swend black color
             }
         }
     }
-
+    refresh_flag = 1;
 }
+
+/*
+*   Send pixels data in JSON format
+*
+	{"pixel":[
+     		{"id":pixen_x,"R":red, "G": green, "B": blue}
+		{"id":pixen_y,"R":red, "G": green, "B": blue}
+ 		...
+ 		{"id":pixen_z,"R":red, "G": green, "B": blue}
+	]}
+ 
+*/
+function ws_sendPixels(){
+	if(refresh_flag == 0){
+		return;
+	}
+	refresh_flag = 0;
+	const jsonData = {"pixel":[]};
+	for(let i=0; i<pixels.length; i++) {
+		let p = pixels[i];
+        if(p.getAttribute('group') == current_active_group) {
+			jsonData.pixel.push({"id":i,"R": hexToRgb(color_pickers[current_active_group - 1].value).r, "G": hexToRgb(color_pickers[current_active_group - 1].value).g, "B": hexToRgb(color_pickers[current_active_group - 1].value).b});
+        }
+        else {
+            if(p.getAttribute('group') == null) {
+				jsonData.pixel.push({"id":i,"R":0, "G": 0, "B": 0});
+            }
+        }
+	}	
+	var data = JSON.stringify(jsonData);
+	websocket.send(data);
+}
+
+const ws_interval = setInterval(ws_sendPixels, 30);
+
+
 
 let pixels = ring_container.children;
 
